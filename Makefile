@@ -6,13 +6,13 @@
 #    By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/05/06 09:48:57 by jgranet           #+#    #+#              #
-#    Updated: 2014/05/06 16:57:27 by jgranet          ###   ########.fr        #
+#    Updated: 2014/05/07 11:33:21 by jgranet          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = philo
 
-SRC = main.c ft_exit.c list.c
+SRC = main.c ft_exit.c list.c ft_distrib_status.c
 
 OBJ = $(SRC:.c=.o)
 
