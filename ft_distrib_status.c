@@ -6,7 +6,7 @@
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/07 10:34:19 by jgranet           #+#    #+#             */
-/*   Updated: 2014/05/07 16:56:21 by jgranet          ###   ########.fr       */
+/*   Updated: 2014/05/07 17:46:59 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,38 @@
 
 static void		ft_resting(t_thread *th, t_thread *prev)
 {
-	printf("philo %d se repose, prev = %d\n", th->num, prev->num);
+	printf("le philo %d se repose\n", th->num);
+//	ft_print(th->num, 0);
 	th->status = 1;
-	th->life--;
-/* 	if (th->time == 0) */
-/* 	{ */
-/* 		th->time = REST_T; */
-		usleep(REST_T * 1000000);
-/* 	} */
-/* 	else */
-/* 		th->time--; */
+	th->life -= REST_T;
+	if (prev)
+		prev = prev;
+	usleep(REST_T * 1000000);
+//	ft_print_2(th->num, 0);
 }
 
 static void		ft_thinking(t_thread *th, t_thread *prev)
 {
-	printf("philo %d reflechit, prev = %d\n", th->num, prev->num);
+	printf("le philo %d reflechit\n", th->num);
+//	ft_print(th->num, 1);
 	th->status = 2;
-	th->life--;
-/* 	if (th->time == 0) */
-/* 	{ */
-/* 		th->time = THINK_T; */
-		usleep(THINK_T * 1000000);
-/* 	} */
-/* 	else */
-/* 		th->time--; */
+	th->life -= THINK_T;
+	if (prev)
+		prev = prev;
+	usleep(THINK_T * 1000000);
+//	ft_print_2(th->num, 1);
 }
 
 static void		ft_eating(t_thread *th, t_thread *prev)
 {
-	printf("philo %d mange, prev = %d\n", th->num, prev->num);
+	if (prev)
+		prev = prev;
+	printf("le philo %d mange\n", th->num);
+//	ft_print(th->num, 2);
 	th->status = 0;
 	th->life = MAX_LIFE;
+	usleep(EAT_T * 1000000);
+//	ft_print_2(th->num, 2);
 }
 
 void			*ft_distrib_status(void *th_data)
@@ -56,19 +57,26 @@ void			*ft_distrib_status(void *th_data)
 	t_thread	*th;
 	t_thread	*prev;
 	int			timeout;
+	int			time_spent;
 
 	th = (t_thread*)th_data;
 	prev = th->prev;
 	timeout = (int)time(NULL) + TIMEOUT;
+	time_spent = (int)time(NULL);
 	while (timeout != (int)time(NULL))
 	{
-		printf("time = %d\n", (int)time(NULL));
 		if (th->status == 0)
 			ft_resting(th, prev);
 		else if (th->status == 1)
 			ft_thinking(th, prev);
 		else if (th->status == 2)
 			ft_eating(th, prev);
+		if (time_spent != (int)time(NULL))
+		{
+			if (th->status != 2)
+				th->life--;
+			time_spent = (int)time(NULL);
+		}
 	}
 	return (th_data);
 }

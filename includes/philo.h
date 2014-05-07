@@ -6,7 +6,7 @@
 /*   By: yoreal <yoreal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/05 12:16:44 by yoreal            #+#    #+#             */
-/*   Updated: 2014/05/07 16:48:43 by jgranet          ###   ########.fr       */
+/*   Updated: 2014/05/07 17:38:41 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define TIMEOUT 10
 
 # include <pthread.h>
+# include <string.h>
 
 typedef struct			s_thread
 {
@@ -27,7 +28,6 @@ typedef struct			s_thread
 	int					num;
 	int					life;
 	int					status;
-	int					time;
 	pthread_mutex_t		mutex;
 	struct s_thread		*next;
 	struct s_thread		*prev;
@@ -36,5 +36,12 @@ typedef struct			s_thread
 t_thread				*ft_create_list(t_thread *th);
 void					*ft_distrib_status(void *th);
 void					ft_exit(char *error);
+void					ft_putchar_fd(char c, int fd);
+void					ft_putstr_fd(char const *s, int fd);
+void					ft_putendl_fd(char const *s, int fd);
+void					ft_putnbr_fd(int n, int fd);
+void					ft_print(int num, int opt);
+void					ft_print_2(int num, int opt);
+size_t					ft_strlen(const char *s);
 
 #endif
