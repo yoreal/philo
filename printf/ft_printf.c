@@ -10,40 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdarg.h>
+#include "philo.h"
 
-static void		ft_init_var(int *i, int *len)
+void			ft_printf(const char *format, ...)
 {
-	*i = 0;
-	*len = 0;
-}
+	va_list		ap;
+	int			i;
 
-int				ft_printf(const char *format, ...)
-{
-	va_list	ap;
-	int		i;
-	int		len;
-
-	ft_init_var(&i, &len);
+	i = 0;
 	va_start(ap, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			if (format[i + 1] == 'd' || format[i + 1] == 'i')
-				len = ft_putnbr(va_arg(ap, int));
+				ft_putnbr_fd(va_arg(ap, int), 1);
 			else if (format[i + 1] == 's')
-				len = ft_putstr(va_arg(ap, char*));
+				ft_putstr_fd(va_arg(ap, char*), 1);
 			else if (format[i + 1] == 'c')
-				len = ft_putchar((char)va_arg(ap, int));
+				ft_putchar_fd((char)va_arg(ap, int), 1);
 			else
-				len = ft_putchar(format[i]);
+				ft_putchar_fd(format[i], 1);
 			i++;
 		}
 		else
-			ft_putchar(format[i]);
+			ft_putchar_fd(format[i], 1);
 		i++;
 	}
 	va_end(ap);
-	return (len + 1);
 }
