@@ -6,13 +6,14 @@
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/07 10:34:19 by jgranet           #+#    #+#             */
-/*   Updated: 2014/05/08 12:06:57 by jgranet          ###   ########.fr       */
+/*   Updated: 2014/05/09 09:43:36 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <time.h>
 #include "philo.h"
+#include "./ft_printf/includes/ft_printf.h"
 
 #include <stdio.h>
 
@@ -21,7 +22,7 @@ static void		ft_resting(t_thread *th, t_thread *prev)
 	int		i;
 
 	i = -1;
-	printf("le philo %d se repose\n", th->num);
+	ft_printf("le philo %d se repose\n", th->num);
 //	ft_print(th->num, 0);
 	th->status = 1;
 	while (++i < REST_T)
@@ -39,7 +40,7 @@ static void		ft_thinking(t_thread *th, t_thread *prev)
 	int		i;
 
 	i = -1;
-	printf("le philo %d reflechit\n", th->num);
+	ft_printf("le philo %d reflechit\n", th->num);
 //	ft_print(th->num, 1);
 	th->status = 2;
 	while (++i < THINK_T)
@@ -56,7 +57,7 @@ static void		ft_eating(t_thread *th, t_thread *prev)
 {
 	if (prev)
 		prev = th;
-	printf("le philo %d mange\n", th->num);
+	ft_printf("le philo %d mange\n", th->num);
 //	ft_print(th->num, 2);
 	th->status = 0;
 	th->life = MAX_LIFE;
