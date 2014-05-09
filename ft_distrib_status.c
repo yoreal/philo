@@ -6,7 +6,7 @@
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/07 10:34:19 by jgranet           #+#    #+#             */
-/*   Updated: 2014/05/09 19:11:16 by yoreal           ###   ########.fr       */
+/*   Updated: 2014/05/09 20:38:49 by yoreal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void			ft_resting(t_thread *th)
 		usleep(1000000);
 	}
 	printf("le philo %d a fini de se \033[37;01mreposer\033[00m, life = %d\n", th->num, th->life);
+	status_0(th, th->prev, th->next);
 }
 
 void			ft_thinking(t_thread *th)
@@ -46,6 +47,7 @@ void			ft_thinking(t_thread *th)
 	}
 	printf("le philo %d a fini de \033[36;01mreflechir\033[00m, life = %d\n", th->num, th->life);
 	pthread_mutex_unlock(&th->mutex);
+	status_1(th, th->prev);
 }
 
 void			ft_eating(t_thread *th, t_thread *prev)
@@ -65,17 +67,18 @@ void			ft_eating(t_thread *th, t_thread *prev)
 	pthread_mutex_unlock(&th->mutex);
 	pthread_mutex_unlock(&prev->mutex);
 	printf("le philo %d a fini de \033[35;01mmanger\033[00m, life = %d\n", th->num, th->life);
+	ft_thinking(th);
 }
 
 
-static void		ft_check_status(t_thread *th, t_thread *prev, t_thread *next)
+static void		ft_check_status(t_thread *th, t_thread *prev)
 {
 		if (th->status == 0)
-			status_0(th, prev, next);
+			ft_resting(th);
 		else if (th->status == 1)
-			status_1(th, prev);
-		else if (th->status == 2)
 			ft_thinking(th);
+		else if (th->status == 2)
+			ft_eating(th, prev);
 }
 
 void			*ft_distrib_status(void *th_data)
@@ -89,7 +92,7 @@ void			*ft_distrib_status(void *th_data)
 	i = 0;
 	while (timeout >= (int)time(NULL) && th->life > 0)
 	{
-		ft_check_status(th, th->prev, th->next);
+		ft_check_status(th, th->prev);
 	}
 	if (th->life == 0)
 	{
