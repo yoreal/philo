@@ -6,14 +6,15 @@
 #    By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/18 10:31:15 by jgranet           #+#    #+#              #
-#    Updated: 2014/05/09 09:36:52 by jgranet          ###   ########.fr        #
+#    Updated: 2014/05/09 18:21:29 by jgranet          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libftprintf.a
 HEADER = -I includes
 FLAGS = -Wall -Werror -Wextra
-SRC = ft_printf.c ft_putchar_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_strlen.c
+SRC = ft_printf.c ft_putchar_fd.c ft_putstr_fd.c ft_strlen.c ft_strcat.c \
+	ft_strdup.c ft_itoa.c ft_strjoin.c ft_strcpy.c ft_strnew.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
