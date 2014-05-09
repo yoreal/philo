@@ -6,7 +6,7 @@
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/07 10:34:19 by jgranet           #+#    #+#             */
-/*   Updated: 2014/05/09 20:38:49 by yoreal           ###   ########.fr       */
+/*   Updated: 2014/05/09 21:57:07 by yoreal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ void			ft_resting(t_thread *th)
 	int			i;
 
 	i = -1;
-	th->status = 0;
 	printf("le philo %d se \033[37;01mrepose\033[00m, life = %d\n", th->num, th->life);
 	while (++i < REST_T && th->life > 0)
 	{
 		th->life--;
-		usleep(1000000);
+		usleep(10000);
 	}
 	printf("le philo %d a fini de se \033[37;01mreposer\033[00m, life = %d\n", th->num, th->life);
 	status_0(th, th->prev, th->next);
@@ -38,12 +37,11 @@ void			ft_thinking(t_thread *th)
 	int			i;
 
 	i = -1;
-	th->status = 1;
 	printf("le philo %d \033[36;01mreflechit\033[00m, life = %d\n", th->num, th->life);
 	while (++i < THINK_T && th->life > 0)
 	{
 		th->life--;
-		usleep(1000000);
+		usleep(10000);
 	}
 	printf("le philo %d a fini de \033[36;01mreflechir\033[00m, life = %d\n", th->num, th->life);
 	pthread_mutex_unlock(&th->mutex);
@@ -55,19 +53,18 @@ void			ft_eating(t_thread *th, t_thread *prev)
 	int			i;
 
 	i = -1;
-	th->status = 2;
 	printf("le philo %d \033[35;01mmange\033[00m, life = %d\n", th->num, th->life);
 	while (++i < EAT_T && th->life > 0)
 	{
 		th->life--;
-		usleep(1000000);
+		usleep(10000);
 	}
 	if (th->life > 0)
 		th->life = MAX_LIFE;
 	pthread_mutex_unlock(&th->mutex);
 	pthread_mutex_unlock(&prev->mutex);
 	printf("le philo %d a fini de \033[35;01mmanger\033[00m, life = %d\n", th->num, th->life);
-	ft_thinking(th);
+	th->status = 1;
 }
 
 
