@@ -6,12 +6,12 @@
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/18 10:29:33 by jgranet           #+#    #+#             */
-/*   Updated: 2013/12/22 18:34:51 by jgranet          ###   ########.fr       */
+/*   Updated: 2014/05/09 09:48:44 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "philo.h"
+#include "ft_printf.h"
 
 void			ft_printf(const char *format, ...)
 {
