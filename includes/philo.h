@@ -6,7 +6,7 @@
 /*   By: yoreal <yoreal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/05 12:16:44 by yoreal            #+#    #+#             */
-/*   Updated: 2014/05/08 12:11:25 by jgranet          ###   ########.fr       */
+/*   Updated: 2014/05/09 12:59:41 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define MAX_LIFE 10
 # define EAT_T 2
-# define REST_T 2
-# define THINK_T 2
+# define REST_T 3
+# define THINK_T 3
 # define TIMEOUT 10
 
 # include <pthread.h>

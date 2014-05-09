@@ -6,7 +6,7 @@
 #    By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/05/06 09:48:57 by jgranet           #+#    #+#              #
-#    Updated: 2014/05/09 09:42:10 by jgranet          ###   ########.fr        #
+#    Updated: 2014/05/09 10:19:55 by jgranet          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,18 +19,18 @@ OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall -Werror -Wextra
 
-HEADER = -I ./includes/
+HEADER = -I includes
 
-LPRINTF = -L./ft_printf/ -lprintf
+LPRINTF = -L./ft_printf -lftprintf
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C ft_printf
-	gcc $(FLAGS) -o $(NAME) $(OBJ) $(HEADER) $(LIBPRINTF)
+	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LPRINTF)
 
 %.o:%.c
-	gcc $(FLAGS) -c $(SRC) $(HEADER) $(LIBPRINTF)
+	gcc $(FLAGS) -c $(SRC) $(HEADER)
 
 clean:
 	make clean -C ft_printf

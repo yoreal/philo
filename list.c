@@ -6,7 +6,7 @@
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/06 16:33:11 by jgranet           #+#    #+#             */
-/*   Updated: 2014/05/08 12:03:14 by jgranet          ###   ########.fr       */
+/*   Updated: 2014/05/09 12:53:44 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_thread		*ft_new(t_thread *tmp, t_thread *tmp2, int i)
 		new->num = i;
 		new->life = MAX_LIFE;
 		new->status = 0;
-		new->mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
+		pthread_mutex_init(&new->mutex, NULL);
 		if (i != 7)
 			new->next = NULL;
 		else
