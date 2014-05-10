@@ -6,7 +6,7 @@
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/18 10:29:33 by jgranet           #+#    #+#             */
-/*   Updated: 2014/05/09 17:19:18 by jgranet          ###   ########.fr       */
+/*   Updated: 2014/05/09 23:06:50 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,10 @@ void			ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			ft_create_str(&str, format, i, ap);
-/* 			if (format[i + 1] == 'd' || format[i + 1] == 'i') */
-/* 				ft_putnbr_fd(va_arg(ap, int), 1); */
-/* 			else if (format[i + 1] == 's') */
-/* 				ft_putstr_fd(va_arg(ap, char*), 1); */
-/* 			else if (format[i + 1] == 'c') */
-/* 				ft_putchar_fd((char)va_arg(ap, int), 1); */
-/* 			else */
-/* 				ft_putchar_fd(format[i], 1); */
 			i++;
 		}
 		else
 			str = ft_charjoin(str, format[i]);
-//			ft_putchar_fd(format[i], 1);
 		i++;
 	}
 	ft_putstr_fd(str, 1);
