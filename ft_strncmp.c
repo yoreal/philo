@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgranet <jgranet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/07 17:09:25 by jgranet           #+#    #+#             */
-/*   Updated: 2014/05/10 18:16:33 by jgranet          ###   ########.fr       */
+/*   Created: 2014/05/09 21:30:04 by jgranet           #+#    #+#             */
+/*   Updated: 2014/05/09 21:32:53 by jgranet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <time.h>
-#include "philo.h"
+#include <string.h>
 
-void		*ft_print(void *print_data)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_print		*print;
-	int			timeout;
-	int			i;
-
-	i = -1;
-	print = (t_print*)print_data;
-	timeout = (int)time(NULL) + TIMEOUT;
-	ft_put();
-	while (timeout >= (int)time(NULL) && print->th->life > 0)
+	if (s1 && s2 && n)
 	{
-		ft_put_2(print->th);
-		print->th = print->th->next;
+		while (n-- > 0)
+		{
+			if (*s1 != *s2)
+			{
+				if (*(unsigned char *)s1 > *(unsigned char *)s2)
+					return (1);
+				else
+					return (-1);
+			}
+			if (*s1 == '\0')
+				return (0);
+			s1++;
+			s2++;
+		}
 	}
-	while (++i < 7)
-	{
-		ft_put_2(print->th);
-		print->th = print->th->next;
-	}
-	return (print_data);
+	return (0);
 }
